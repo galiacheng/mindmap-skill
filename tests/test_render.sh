@@ -3,7 +3,7 @@
 set -u
 here="$(cd "$(dirname "$0")" && pwd)"
 source "$here/lib.sh"
-RENDER="$here/../skills/mindmap/render.sh"
+RENDER="$here/../skills/mindmap/scripts/render.sh"
 FIXTURE="$here/fixtures/sample.mindmap.md"
 
 # Clean up all temp dirs created below, even if a check fails.

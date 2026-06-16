@@ -113,7 +113,7 @@ markmap:
 /mindmap "transformer attention" --render
 ```
 
-This runs `npx markmap-cli <file>.md -o <file>.html --no-open` under the hood (via [`skills/mindmap/render.sh`](skills/mindmap/render.sh)).
+This runs `npx markmap-cli <file>.md -o <file>.html --no-open` under the hood (via [`skills/mindmap/scripts/render.sh`](skills/mindmap/scripts/render.sh)).
 
 - **The `.md` is always the guaranteed deliverable.** Rendering is best-effort.
 - If `npx` / Node.js isn't installed, the skill still writes the `.md`, reports that rendering was skipped, and prints the exact command to run manually — nothing is lost.
@@ -128,12 +128,13 @@ This is a **prompt-driven** skill: the intelligence lives in instructions, not c
 
 ```
 skills/mindmap/
-├── SKILL.md     # the workflow Claude follows: resolve input → build hierarchy → write .md → (optional) render
-└── render.sh    # the only code — a thin wrapper around `npx markmap-cli`
+├── SKILL.md            # the workflow Claude follows: resolve input → build hierarchy → write .md → (optional) render
+└── scripts/
+    └── render.sh       # the only code — a thin wrapper around `npx markmap-cli`
 ```
 
 - [`SKILL.md`](skills/mindmap/SKILL.md) tells Claude how to classify the input, apply the hybrid structuring rules, write a well-formed Markmap file, and handle edge cases (missing files, empty input, name collisions, render fallback).
-- [`render.sh`](skills/mindmap/render.sh) is a ~35-line bash helper with deterministic exit codes (`0` ok · `1` usage · `2` file not found · `3` npx missing · `4` render failed). On success it prints only the `.html` path to stdout.
+- [`scripts/render.sh`](skills/mindmap/scripts/render.sh) is a ~35-line bash helper with deterministic exit codes (`0` ok · `1` usage · `2` file not found · `3` npx missing · `4` render failed). On success it prints only the `.html` path to stdout.
 
 See [`docs/design-spec.md`](docs/design-spec.md) for the full design and [`docs/implementation-plan.md`](docs/implementation-plan.md) for the build.
 
@@ -156,7 +157,8 @@ mindmap/
 │   └── marketplace.json   # marketplace manifest (for /plugin marketplace add)
 ├── skills/mindmap/
 │   ├── SKILL.md
-│   └── render.sh
+│   └── scripts/
+│       └── render.sh
 ├── tests/                 # bash harness for render.sh + SKILL.md structure
 ├── docs/                  # design spec + implementation plan
 ├── LICENSE

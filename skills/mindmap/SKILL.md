@@ -57,10 +57,10 @@ Output path:
 After writing, tell the user the exact path and how to view it: open it at https://markmap.js.org or with the VS Code “Markmap” extension.
 
 ### Step 4 (only with `--render`): Render to HTML
-`render.sh` lives in the same directory as this SKILL.md. If you don't already know that absolute path, locate it with Glob (`**/skills/mindmap/render.sh`), then run it by that path:
+`render.sh` lives in the `scripts/` folder next to this SKILL.md. If you don't already know that absolute path, locate it with Glob (`**/skills/mindmap/scripts/render.sh`), then run it by that path:
 
 ```
-bash <skill-dir>/render.sh "<output.md>"
+bash <skill-dir>/scripts/render.sh "<output.md>"
 ```
 
 - On success it prints the `.html` path on stdout — report it to the user.
