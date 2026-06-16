@@ -90,6 +90,18 @@ Then run `/reload-skills` (or restart Claude Code). Confirm with `/help` that `/
 
 ---
 
+## Example
+
+See [`examples/`](examples/) for real output. A GitHub blog post turned into a mindmap with one command:
+
+```
+/mindmap https://github.blog/ai-and-ml/how-we-made-github-copilot-cli-more-selective-about-delegation/ --render
+```
+
+→ [`examples/copilot-cli-selective-delegation.mindmap.md`](examples/copilot-cli-selective-delegation.mindmap.md) (source) and [`.mindmap.html`](examples/copilot-cli-selective-delegation.mindmap.html) (rendered, open in a browser).
+
+---
+
 ## Output format
 
 The skill writes [Markmap](https://markmap.js.org)-flavored markdown — a single `#` root, `##` branches, and nested bullets:
@@ -178,6 +190,7 @@ mindmap/
 │   ├── mindmap/           # English skill (/mindmap)
 │   └── mindmap-zh/        # Chinese skill (/mindmap-zh)
 ├── tests/                 # bash harness for render.sh + SKILL.md structure
+├── examples/              # real generated output (.md + rendered .html)
 ├── docs/                  # design spec
 ├── LICENSE
 └── README.md

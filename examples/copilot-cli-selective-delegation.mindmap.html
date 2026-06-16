@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>Markmap</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+.markmap-dark {
+  background: #27272a;
+  color: white;
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/style.css">
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.12/dist/browser/index.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/index.js"></script><script>((r) => {
+          setTimeout(r);
+        })(() => {
+  const { markmap, mm } = window;
+  const toolbar = new markmap.Toolbar();
+  toolbar.attach(mm);
+  const el = toolbar.render();
+  el.setAttribute("style", "position:absolute;bottom:20px;right:20px");
+  document.body.append(el);
+})</script><script>((getMarkmap, getOptions, root2, jsonOptions) => {
+              const markmap = getMarkmap();
+              window.mm = markmap.Markmap.create(
+                "svg#mindmap",
+                (getOptions || markmap.deriveOptions)(jsonOptions),
+                root2
+              );
+              if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                document.documentElement.classList.add("markmap-dark");
+              }
+            })(() => window.markmap,null,{"content":"Smarter Subagent Delegation","children":[{"content":"The Problem","children":[{"content":"Delegation is powerful but not free","children":[],"payload":{"tag":"li","lines":"10,11"}},{"content":"Unnecessary handoffs for simple tasks","children":[],"payload":{"tag":"li","lines":"11,12"}},{"content":"Overusing exploration subagents","children":[],"payload":{"tag":"li","lines":"12,13"}},{"content":"Repeated / overlapping searches","children":[],"payload":{"tag":"li","lines":"13,14"}},{"content":"Sequential delegation = waiting","children":[],"payload":{"tag":"li","lines":"14,15"}},{"content":"Failure-prone paths (stale, wrong, mismatched)","children":[],"payload":{"tag":"li","lines":"15,17"}}],"payload":{"tag":"h2","lines":"9,10"}},{"content":"The Approach","children":[{"content":"Single feedback loop, not separate steps","children":[],"payload":{"tag":"li","lines":"18,19"}},{"content":"<strong>Analyze</strong> &#x2014; LLMs find delegation bottleneck","children":[{"content":"Subagents called for already-narrow tasks","children":[],"payload":{"tag":"li","lines":"20,21"}}],"payload":{"tag":"li","lines":"19,21"}},{"content":"<strong>Change</strong> &#x2014; refine orchestration policy","children":[{"content":"Handle focused work directly","children":[],"payload":{"tag":"li","lines":"22,23"}},{"content":"Delegate for breadth / parallelism","children":[],"payload":{"tag":"li","lines":"23,24"}},{"content":"Start narrowest path, escalate only if it adds value","children":[],"payload":{"tag":"li","lines":"24,25"}},{"content":"Subagents = parallelism tool, not pause button","children":[],"payload":{"tag":"li","lines":"25,26"}}],"payload":{"tag":"li","lines":"21,26"}},{"content":"<strong>Validate</strong> &#x2014; offline, then online, then ship","children":[],"payload":{"tag":"li","lines":"26,28"}}],"payload":{"tag":"h2","lines":"17,18"}},{"content":"Results","children":[{"content":"Tool failures per session &#x2212;23%","children":[],"payload":{"tag":"li","lines":"29,30"}},{"content":"Search failures &#x2212;27%, edit failures &#x2212;18%","children":[],"payload":{"tag":"li","lines":"30,31"}},{"content":"Wait time &#x2212;5% P95, &#x2212;3% P75","children":[],"payload":{"tag":"li","lines":"31,32"}},{"content":"No quality regression","children":[],"payload":{"tag":"li","lines":"32,33"}},{"content":"Subagent LLM duration &#x2212;12% avg, &#x2212;18% P95","children":[],"payload":{"tag":"li","lines":"33,35"}}],"payload":{"tag":"h2","lines":"28,29"}},{"content":"Benefits Today","children":[{"content":"Simple tasks handled directly","children":[],"payload":{"tag":"li","lines":"36,37"}},{"content":"Complex tasks still get specialists","children":[],"payload":{"tag":"li","lines":"37,38"}},{"content":"Long sessions keep moving","children":[],"payload":{"tag":"li","lines":"38,39"}},{"content":"Behind the scenes &#x2014; workflows unchanged","children":[],"payload":{"tag":"li","lines":"39,41"}}],"payload":{"tag":"h2","lines":"35,36"}},{"content":"What&apos;s Next","children":[{"content":"More adaptive across models / agents / skills / tools","children":[],"payload":{"tag":"li","lines":"42,43"}},{"content":"Decide: act, delegate, or use a skill","children":[],"payload":{"tag":"li","lines":"43,44"}},{"content":"Less waiting, fewer failures, more progress","children":[],"payload":{"tag":"li","lines":"44,46"}}],"payload":{"tag":"h2","lines":"41,42"}},{"content":"Rollout","children":[{"content":"100% of production traffic","children":[],"payload":{"tag":"li","lines":"47,48"}},{"content":"<code>/update</code> to v1.0.42+","children":[],"payload":{"tag":"li","lines":"48,49"}},{"content":"Feedback via <code>/feedback</code>","children":[],"payload":{"tag":"li","lines":"49,50"}}],"payload":{"tag":"h2","lines":"46,47"}}],"payload":{"tag":"h1","lines":"7,8"}},{"colorFreezeLevel":2,"maxWidth":300})</script>
+</body>
+</html>

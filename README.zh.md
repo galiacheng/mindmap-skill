@@ -90,6 +90,18 @@ cp -r skills/mindmap skills/mindmap-zh ~/.claude/skills/
 
 ---
 
+## 示例
+
+实际输出见 [`examples/`](examples/)。一条命令把一篇 GitHub 博客文章变成思维导图：
+
+```
+/mindmap https://github.blog/ai-and-ml/how-we-made-github-copilot-cli-more-selective-about-delegation/ --render
+```
+
+→ [`examples/copilot-cli-selective-delegation.mindmap.md`](examples/copilot-cli-selective-delegation.mindmap.md)（源文件）与 [`.mindmap.html`](examples/copilot-cli-selective-delegation.mindmap.html)（已渲染，可在浏览器打开）。
+
+---
+
 ## 输出格式
 
 技能写出 [Markmap](https://markmap.js.org) 风格的 markdown——单个 `#` 根节点、`##` 分支、嵌套列表项：
@@ -178,6 +190,7 @@ mindmap/
 │   ├── mindmap/           # 英文技能（/mindmap）
 │   └── mindmap-zh/        # 中文技能（/mindmap-zh）
 ├── tests/                 # render.sh + SKILL.md 结构的 bash 测试
+├── examples/              # 实际生成的输出（.md + 渲染后的 .html）
 ├── docs/                  # 设计文档
 ├── LICENSE
 └── README.md
