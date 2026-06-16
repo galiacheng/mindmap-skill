@@ -150,7 +150,7 @@ The render helper has a bash test suite (no network — it uses a fake `npx`):
 bash tests/run_tests.sh
 ```
 
-Expected: `ALL TESTS PASSED` (25 checks across `test_render.sh`, `test_skill_frontmatter.sh`, `test_skill_body.sh`).
+Expected: `ALL TESTS PASSED` (27 checks across `test_render.sh`, `test_skill_frontmatter.sh`, `test_skill_body.sh`).
 
 ```
 mindmap/
