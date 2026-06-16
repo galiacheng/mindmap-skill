@@ -1,6 +1,6 @@
 # mindmap
 
-A [Claude Code](https://docs.claude.com/en/docs/claude-code) plugin that turns **any input — a file, a URL, pasted text, or a bare topic — into an interactive [Markmap](https://markmap.js.org) mindmap.**
+A plugin for [Claude Code](https://docs.claude.com/en/docs/claude-code) and [GitHub Copilot CLI](https://docs.github.com/copilot/concepts/agents/copilot-cli) that turns **any input — a file, a URL, pasted text, or a bare topic — into an interactive [Markmap](https://markmap.js.org) mindmap.**
 
 ```
 /mindmap LLM-research-report.md
@@ -25,9 +25,9 @@ The skill reads your input, builds a clean node hierarchy, and writes a Markmap 
 
 ## Install
 
-### Option A — via marketplace (recommended)
+The same repo is a valid plugin for **both** Claude Code and GitHub Copilot CLI — they share the plugin/marketplace format.
 
-From within Claude Code:
+### Claude Code
 
 ```
 /plugin marketplace add galiacheng/mindmap-skills
@@ -35,9 +35,18 @@ From within Claude Code:
 /reload-plugins
 ```
 
+### GitHub Copilot CLI
+
+```bash
+copilot plugin marketplace add galiacheng/mindmap-skills
+copilot plugin install mindmap@mindmap-marketplace
+```
+
+Then run `/mindmap` in your session. On Copilot CLI the skill uses the same workflow; tool names map automatically (see [`skills/mindmap/references/copilot-tools.md`](skills/mindmap/references/copilot-tools.md)).
+
 The marketplace manifest lives at [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json).
 
-### Option B — manual (local, no marketplace)
+### Manual (local, no marketplace)
 
 Copy the skill into your project's (or user-level) skills directory:
 
@@ -131,8 +140,10 @@ This is a **prompt-driven** skill: the intelligence lives in instructions, not c
 ```
 skills/mindmap/
 ├── SKILL.md            # the workflow Claude follows: resolve input → build hierarchy → write .md → (optional) render
-└── scripts/
-    └── render.sh       # the only code — a thin wrapper around `npx markmap-cli`
+├── scripts/
+│   └── render.sh       # the only code — a thin wrapper around `npx markmap-cli`
+└── references/
+    └── copilot-tools.md  # Claude Code → Copilot CLI tool-name mapping
 ```
 
 - [`SKILL.md`](skills/mindmap/SKILL.md) tells Claude how to classify the input, apply the hybrid structuring rules, write a well-formed Markmap file, and handle edge cases (missing files, empty input, name collisions, render fallback).
@@ -159,8 +170,10 @@ mindmap/
 │   └── marketplace.json   # marketplace manifest (for /plugin marketplace add)
 ├── skills/mindmap/
 │   ├── SKILL.md
-│   └── scripts/
-│       └── render.sh
+│   ├── scripts/
+│   │   └── render.sh
+│   └── references/
+│       └── copilot-tools.md
 ├── tests/                 # bash harness for render.sh + SKILL.md structure
 ├── docs/                  # design spec
 ├── LICENSE

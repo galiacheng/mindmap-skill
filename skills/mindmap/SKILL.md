@@ -20,6 +20,8 @@ Flags:
 - `--render` — after writing the `.md`, also produce a standalone interactive `.html`
 - `--output <path>` — write the `.md` to this path instead of the default
 
+> **Cross-harness note:** This skill uses Claude Code tool names (`Read`, `Write`, `Glob`, `Bash`, `WebFetch`). On **GitHub Copilot CLI**, use the equivalents (`view`, `create`, `glob`, `bash`, `web_fetch`) — see [`references/copilot-tools.md`](references/copilot-tools.md). The workflow itself is identical on both.
+
 ## Workflow
 
 ### Step 1: Resolve the input
