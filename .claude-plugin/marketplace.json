@@ -8,8 +8,8 @@
   "plugins": [
     {
       "name": "mindmap",
-      "description": "Generate an interactive Markmap mindmap from a file, a URL, pasted text, or a topic.",
-      "version": "0.2.0",
+      "description": "Generate an interactive Markmap mindmap from a file, a URL, pasted text, or a topic. Bilingual: /mindmap (English) and /mindmap-zh (Chinese).",
+      "version": "0.3.0",
       "source": "./",
       "author": {
         "name": "Haixia Cheng",

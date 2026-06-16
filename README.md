@@ -1,6 +1,10 @@
 # mindmap
 
+[English](README.md) | [中文](README.zh.md)
+
 A plugin for [Claude Code](https://docs.claude.com/en/docs/claude-code) and [GitHub Copilot CLI](https://docs.github.com/copilot/concepts/agents/copilot-cli) that turns **any input — a file, a URL, pasted text, or a bare topic — into an interactive [Markmap](https://markmap.js.org) mindmap.**
+
+> Ships in two languages: `/mindmap` (English) and `/mindmap-zh` (中文). Both are bundled in the same plugin.
 
 ```
 /mindmap LLM-research-report.md
@@ -161,19 +165,16 @@ The render helper has a bash test suite (no network — it uses a fake `npx`):
 bash tests/run_tests.sh
 ```
 
-Expected: `ALL TESTS PASSED` (27 checks across `test_render.sh`, `test_skill_frontmatter.sh`, `test_skill_body.sh`).
+Expected: `ALL TESTS PASSED` (45 checks across `test_render.sh`, `test_skill_frontmatter.sh`, `test_skill_body.sh`, `test_skill_zh.sh`).
 
 ```
 mindmap/
 ├── .claude-plugin/
 │   ├── plugin.json        # plugin manifest
 │   └── marketplace.json   # marketplace manifest (for /plugin marketplace add)
-├── skills/mindmap/
-│   ├── SKILL.md
-│   ├── scripts/
-│   │   └── render.sh
-│   └── references/
-│       └── copilot-tools.md
+├── skills/
+│   ├── mindmap/           # English skill (/mindmap)
+│   └── mindmap-zh/        # Chinese skill (/mindmap-zh)
 ├── tests/                 # bash harness for render.sh + SKILL.md structure
 ├── docs/                  # design spec
 ├── LICENSE
