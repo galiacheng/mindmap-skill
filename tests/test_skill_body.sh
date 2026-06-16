@@ -16,5 +16,7 @@ assert_contains "$body" "--render" "documents --render flag"
 assert_contains "$body" "--output" "documents --output flag"
 assert_contains "$body" "render.sh" "calls render.sh for --render"
 assert_contains "$body" "4–7" "states the 4-7 branch guardrail"
+assert_contains "$body" "WebFetch" "documents WebFetch for URL input"
+assert_contains "$body" "URL" "documents URL as an input type"
 
 finish

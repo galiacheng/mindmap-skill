@@ -20,7 +20,7 @@ an optional render step that produces standalone HTML.
 
 ## Non-Goals (YAGNI)
 
-- No URL fetching as an input source.
+- ~~No URL fetching as an input source.~~ **Added after v0.1.0** — URL input is now supported (fetched via WebFetch). See README.
 - No output formats other than Markmap `.md` (no Mermaid/OPML in this version).
 - No user-facing styling knobs beyond sensible baked-in defaults.
 - No heavy parser/template engine — structuring is Claude's judgment, not code.

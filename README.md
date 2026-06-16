@@ -1,9 +1,10 @@
 # mindmap
 
-A [Claude Code](https://docs.claude.com/en/docs/claude-code) plugin that turns **any input — a file, pasted text, or a bare topic — into an interactive [Markmap](https://markmap.js.org) mindmap.**
+A [Claude Code](https://docs.claude.com/en/docs/claude-code) plugin that turns **any input — a file, a URL, pasted text, or a bare topic — into an interactive [Markmap](https://markmap.js.org) mindmap.**
 
 ```
 /mindmap LLM-research-report.md
+/mindmap https://en.wikipedia.org/wiki/Knowledge_graph
 /mindmap "Caching cuts latency and cost. Hit rate depends on TTL and key design. Eviction is LRU or LFU."
 /mindmap "transformer attention" --render
 ```
@@ -14,7 +15,7 @@ The skill reads your input, builds a clean node hierarchy, and writes a Markmap 
 
 ## What it does
 
-- **Three input types** — a file path, raw pasted text/notes, or a short topic prompt (generated from the model's own knowledge).
+- **Four input types** — a file path, a URL (fetched via WebFetch), raw pasted text/notes, or a short topic prompt (generated from the model's own knowledge).
 - **Hybrid structuring** — if your input is already structured (headings/bullets), it mirrors that outline and condenses each node to a short phrase. If it's loose prose or a topic, it extracts the key concepts into 4–7 main branches.
 - **Markmap output** — a `.md` file that renders as an interactive mindmap at [markmap.js.org](https://markmap.js.org), in the VS Code [Markmap extension](https://marketplace.visualstudio.com/items?itemName=gera2ld.markmap-vscode), or as standalone HTML.
 - **Optional HTML render** — `--render` shells out to `npx markmap-cli` to build a self-contained `.html`. Zero setup; if `npx` isn't available the `.md` is still produced and you get the exact manual command to run later.
@@ -63,6 +64,7 @@ Then run `/reload-skills` (or restart Claude Code). Confirm with `/help` that `/
 | Input | Example | Behavior |
 |---|---|---|
 | **File** | `/mindmap report.md` | Reads the file, mirrors its structure, condenses nodes. Writes `report.mindmap.md`. |
+| **URL** | `/mindmap https://example.com/article` | Fetches the page (WebFetch), maps its content. Writes `<page-slug>.mindmap.md`. |
 | **Pasted text** | `/mindmap "notes about X, Y, Z..."` | Extracts concepts into branches. Writes `<title-slug>.mindmap.md`. |
 | **Topic** | `/mindmap "vector databases"` | Generates a map from the model's knowledge. Writes `vector-databases.mindmap.md`. |
 
