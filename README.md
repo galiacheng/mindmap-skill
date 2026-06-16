@@ -29,12 +29,12 @@ The skill reads your input, builds a clean node hierarchy, and writes a Markmap 
 From within Claude Code:
 
 ```
-/plugin marketplace add <your-git-host>/mindmap
+/plugin marketplace add galiacheng/mindmap-skill
 /plugin install mindmap@mindmap-marketplace
 /reload-plugins
 ```
 
-Replace `<your-git-host>/mindmap` with wherever you push this repo (e.g. `youruser/mindmap` on GitHub). The marketplace manifest lives at [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json).
+The marketplace manifest lives at [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json).
 
 ### Option B — manual (local, no marketplace)
 
