@@ -37,6 +37,8 @@ A ~1,500-word article becomes a structure you can read in seconds:
 
 That's real output — see [`examples/`](examples/) for the full Markmap `.md` plus the rendered interactive `.html` (open in any browser to zoom and collapse branches).
 
+**▶ [Open the live interactive mindmap](https://galiacheng.github.io/mindmap-skills/examples/copilot-cli-selective-delegation.mindmap.html)** — no install, just click.
+
 ---
 
 ## Why use it

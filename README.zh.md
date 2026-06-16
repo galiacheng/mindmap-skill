@@ -37,6 +37,8 @@
 
 这是真实输出——完整的 Markmap `.md` 与渲染后的可交互 `.html` 见 [`examples/`](examples/)（用浏览器打开即可缩放、折叠分支）。
 
+**▶ [打开在线可交互思维导图](https://galiacheng.github.io/mindmap-skills/examples/copilot-cli-selective-delegation.mindmap.html)** —— 无需安装，点击即看。
+
 ---
 
 ## 为什么用它
