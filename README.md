@@ -138,7 +138,7 @@ skills/mindmap/
 - [`SKILL.md`](skills/mindmap/SKILL.md) tells Claude how to classify the input, apply the hybrid structuring rules, write a well-formed Markmap file, and handle edge cases (missing files, empty input, name collisions, render fallback).
 - [`scripts/render.sh`](skills/mindmap/scripts/render.sh) is a ~35-line bash helper with deterministic exit codes (`0` ok · `1` usage · `2` file not found · `3` npx missing · `4` render failed). On success it prints only the `.html` path to stdout.
 
-See [`docs/design-spec.md`](docs/design-spec.md) for the full design and [`docs/implementation-plan.md`](docs/implementation-plan.md) for the build.
+See [`docs/design-spec.md`](docs/design-spec.md) for the full design.
 
 ---
 
@@ -162,7 +162,7 @@ mindmap/
 │   └── scripts/
 │       └── render.sh
 ├── tests/                 # bash harness for render.sh + SKILL.md structure
-├── docs/                  # design spec + implementation plan
+├── docs/                  # design spec
 ├── LICENSE
 └── README.md
 ```
