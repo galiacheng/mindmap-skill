@@ -30,7 +30,7 @@ The skill reads your input, builds a clean node hierarchy, and writes a Markmap 
 From within Claude Code:
 
 ```
-/plugin marketplace add galiacheng/mindmap-skill
+/plugin marketplace add galiacheng/mindmap-skills
 /plugin install mindmap@mindmap-marketplace
 /reload-plugins
 ```
