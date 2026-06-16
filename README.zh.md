@@ -34,10 +34,12 @@
 ### Claude Code
 
 ```
-/plugin marketplace add galiacheng/mindmap-skills
+/plugin marketplace add https://github.com/galiacheng/mindmap-skills.git
 /plugin install mindmap@mindmap-marketplace
 /reload-plugins
 ```
+
+> 使用显式的 `https://` 地址可避免走 SSH 克隆。`galiacheng/mindmap-skills` 简写形式也可用，**前提是**你已配置 GitHub SSH 密钥；否则会报 `Permission denied (publickey)`。
 
 ### GitHub Copilot CLI
 

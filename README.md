@@ -34,10 +34,12 @@ The same repo is a valid plugin for **both** Claude Code and GitHub Copilot CLI 
 ### Claude Code
 
 ```
-/plugin marketplace add galiacheng/mindmap-skills
+/plugin marketplace add https://github.com/galiacheng/mindmap-skills.git
 /plugin install mindmap@mindmap-marketplace
 /reload-plugins
 ```
+
+> The explicit `https://` URL avoids an SSH clone. The `galiacheng/mindmap-skills` shorthand also works **if** you have GitHub SSH keys configured; otherwise it fails with `Permission denied (publickey)`.
 
 ### GitHub Copilot CLI
 
