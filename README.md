@@ -2,28 +2,52 @@
 
 [English](README.md) | [中文](README.zh.md)
 
-A plugin for [Claude Code](https://docs.claude.com/en/docs/claude-code) and [GitHub Copilot CLI](https://docs.github.com/copilot/concepts/agents/copilot-cli) that turns **any input — a file, a URL, pasted text, or a bare topic — into an interactive [Markmap](https://markmap.js.org) mindmap.**
+**Understand anything at a glance — turn a file, a URL, or a topic into a mindmap without leaving your AI coding agent.**
 
-> Ships in two languages: `/mindmap` (English) and `/mindmap-zh` (中文). Both are bundled in the same plugin.
+`mindmap` is a plugin for [Claude Code](https://docs.claude.com/en/docs/claude-code) and [GitHub Copilot CLI](https://docs.github.com/copilot/concepts/agents/copilot-cli). Point it at a dense report, a long article, or just a topic, and it distills the key ideas into a clean, zoomable [Markmap](https://markmap.js.org) mindmap — right from your terminal.
 
-```
-/mindmap LLM-research-report.md
-/mindmap https://en.wikipedia.org/wiki/Knowledge_graph
-/mindmap "Caching cuts latency and cost. Hit rate depends on TTL and key design. Eviction is LRU or LFU."
-/mindmap "transformer attention" --render
-```
-
-The skill reads your input, builds a clean node hierarchy, and writes a Markmap `.md` file you can open as a zoomable, collapsible mindmap. Pass `--render` to also produce a standalone interactive `.html`.
+> Two languages in one plugin: `/mindmap` (English) and `/mindmap-zh` (中文).
 
 ---
 
-## What it does
+## See it
 
-- **Four input types** — a file path, a URL (fetched via WebFetch), raw pasted text/notes, or a short topic prompt (generated from the model's own knowledge).
-- **Hybrid structuring** — if your input is already structured (headings/bullets), it mirrors that outline and condenses each node to a short phrase. If it's loose prose or a topic, it extracts the key concepts into 4–7 main branches.
-- **Markmap output** — a `.md` file that renders as an interactive mindmap at [markmap.js.org](https://markmap.js.org), in the VS Code [Markmap extension](https://marketplace.visualstudio.com/items?itemName=gera2ld.markmap-vscode), or as standalone HTML.
-- **Optional HTML render** — `--render` shells out to `npx markmap-cli` to build a self-contained `.html`. Zero setup; if `npx` isn't available the `.md` is still produced and you get the exact manual command to run later.
-- **Safe by default** — never overwrites an existing file; collisions get a `-2`, `-3`, … suffix.
+One command turns a long GitHub blog post into a mindmap:
+
+```
+/mindmap https://github.blog/ai-and-ml/how-we-made-github-copilot-cli-more-selective-about-delegation/ --render
+```
+
+A ~1,500-word article becomes a structure you can read in seconds:
+
+```
+# Smarter Subagent Delegation
+├── The Problem
+│   ├── Delegation is powerful but not free
+│   └── Unnecessary handoffs, overlapping searches, waiting
+├── The Approach
+│   ├── Analyze → find the delegation bottleneck
+│   ├── Change → handle focused work directly
+│   └── Validate → offline, then online, then ship
+├── Results
+│   ├── Tool failures per session −23%
+│   └── Wait time −5% P95, no quality regression
+└── What's Next
+```
+
+That's real output — see [`examples/`](examples/) for the full Markmap `.md` plus the rendered interactive `.html` (open in any browser to zoom and collapse branches).
+
+---
+
+## Why use it
+
+- **Grasp dense material fast** — collapse a 3,000-word report into 5–7 branches you can scan at a glance, instead of reading top to bottom.
+- **One command, any source** — a file, a URL, pasted notes, or just a topic. No copy-pasting into a separate web tool.
+- **Stays in your workflow** — runs inside Claude Code / Copilot CLI; the map lands as a file right next to your work.
+- **Smart structure, not a text dump** — mirrors a structured doc's outline, or distills loose prose into 4–7 concise branches. Nodes are short phrases, not sentences.
+- **Portable, interactive output** — standard Markmap `.md` that opens anywhere, plus an optional standalone `.html` you can share.
+
+**Good for:** skimming research papers and reports · digesting blog posts and docs · outlining a topic before you write · turning meeting notes into a shareable map.
 
 ---
 
@@ -87,18 +111,6 @@ Then run `/reload-skills` (or restart Claude Code). Confirm with `/help` that `/
 
 - `--render` — after writing the `.md`, also produce a standalone interactive `.html` (needs Node.js / `npx`).
 - `--output <path>` — write the `.md` to a specific path instead of the default.
-
----
-
-## Example
-
-See [`examples/`](examples/) for real output. A GitHub blog post turned into a mindmap with one command:
-
-```
-/mindmap https://github.blog/ai-and-ml/how-we-made-github-copilot-cli-more-selective-about-delegation/ --render
-```
-
-→ [`examples/copilot-cli-selective-delegation.mindmap.md`](examples/copilot-cli-selective-delegation.mindmap.md) (source) and [`.mindmap.html`](examples/copilot-cli-selective-delegation.mindmap.html) (rendered, open in a browser).
 
 ---
 

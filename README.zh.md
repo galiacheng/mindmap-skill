@@ -2,28 +2,52 @@
 
 [English](README.md) | [中文](README.zh.md)
 
-一个适用于 [Claude Code](https://docs.claude.com/en/docs/claude-code) 与 [GitHub Copilot CLI](https://docs.github.com/copilot/concepts/agents/copilot-cli) 的插件，能把**任意输入——文件、URL、粘贴的文本或一个主题——变成可交互的 [Markmap](https://markmap.js.org) 思维导图。**
+**一眼读懂任何材料——在你的 AI 编码助手里，把文件、URL 或主题直接变成思维导图。**
 
-> 内置两种语言：`/mindmap`（英文）与 `/mindmap-zh`（中文）。二者打包在同一个插件里。
+`mindmap` 是一个适用于 [Claude Code](https://docs.claude.com/en/docs/claude-code) 与 [GitHub Copilot CLI](https://docs.github.com/copilot/concepts/agents/copilot-cli) 的插件。把它指向一份密集的报告、一篇长文，或仅仅一个主题，它就会把关键内容提炼成清晰、可缩放的 [Markmap](https://markmap.js.org) 思维导图——就在你的终端里完成。
 
-```
-/mindmap-zh LLM-研究报告.md
-/mindmap-zh https://zh.wikipedia.org/wiki/知识图谱
-/mindmap-zh "缓存能降低延迟和成本。命中率取决于 TTL 与键设计。淘汰策略可用 LRU 或 LFU。"
-/mindmap-zh "Transformer 注意力机制" --render
-```
-
-技能读取你的输入，构建清晰的节点层级，并写出一个 Markmap `.md` 文件，可作为可缩放、可折叠的思维导图打开。加上 `--render` 还能额外生成一个独立的可交互 `.html`。
+> 一个插件，两种语言：`/mindmap`（英文）与 `/mindmap-zh`（中文）。
 
 ---
 
-## 功能特性
+## 一眼看懂
 
-- **四种输入类型** — 文件路径、URL（经由 WebFetch 抓取）、粘贴的文本/笔记，或一个简短主题（基于模型自身知识生成）。
-- **混合式结构化** — 若输入本身已有结构（标题/列表），则沿用其大纲并将每个节点压缩为简短短语；若是松散文本或主题，则提炼关键概念并归纳为 4–7 个主分支。
-- **Markmap 输出** — 一个 `.md` 文件，可在 [markmap.js.org](https://markmap.js.org)、VS Code 的 [Markmap 扩展](https://marketplace.visualstudio.com/items?itemName=gera2ld.markmap-vscode) 中渲染为可交互导图，或导出为独立 HTML。
-- **可选 HTML 渲染** — `--render` 调用 `npx markmap-cli` 生成自包含的 `.html`。零配置；若没有 `npx`，仍会写出 `.md`，并给出可手动执行的确切命令。
-- **默认安全** — 绝不覆盖已有文件；重名时追加 `-2`、`-3`…… 后缀。
+一条命令，把一篇很长的 GitHub 博客文章变成思维导图：
+
+```
+/mindmap-zh https://github.blog/ai-and-ml/how-we-made-github-copilot-cli-more-selective-about-delegation/ --render
+```
+
+一篇约 1500 词的文章，变成几秒就能读完的结构：
+
+```
+# 更聪明的子智能体委派
+├── 问题
+│   ├── 委派很强大，但并非没有代价
+│   └── 多余的交接、重复的检索、等待
+├── 方法
+│   ├── 分析 → 定位委派瓶颈
+│   ├── 改进 → 简单任务主智能体直接做
+│   └── 验证 → 先离线、再在线、最后发布
+├── 结果
+│   ├── 每次会话工具失败 −23%
+│   └── 等待时间 P95 −5%，质量无回退
+└── 下一步
+```
+
+这是真实输出——完整的 Markmap `.md` 与渲染后的可交互 `.html` 见 [`examples/`](examples/)（用浏览器打开即可缩放、折叠分支）。
+
+---
+
+## 为什么用它
+
+- **快速读懂密集材料** — 把一份 3000 词的报告收拢为 5–7 个分支，一眼扫完，而不必从头读到尾。
+- **一条命令，任意来源** — 文件、URL、粘贴的笔记，或仅一个主题。无需复制粘贴到另一个网页工具。
+- **不打断你的工作流** — 在 Claude Code / Copilot CLI 内运行；导图作为文件就落在你工作的旁边。
+- **智能结构，而非文本堆砌** — 沿用已有结构的大纲，或把松散文本提炼为 4–7 个简洁分支。节点是短语，不是句子。
+- **可移植、可交互的产物** — 标准 Markmap `.md`，到哪都能打开；外加一个可分享的独立 `.html`。
+
+**适用场景：** 速览研究论文与报告 · 消化博客文章与文档 · 动笔前先梳理主题 · 把会议记录变成可分享的导图。
 
 ---
 
@@ -87,18 +111,6 @@ cp -r skills/mindmap skills/mindmap-zh ~/.claude/skills/
 
 - `--render` — 写出 `.md` 后，额外生成一个独立的可交互 `.html`（需要 Node.js / `npx`）。
 - `--output <路径>` — 将 `.md` 写到指定路径，而非默认路径。
-
----
-
-## 示例
-
-实际输出见 [`examples/`](examples/)。一条命令把一篇 GitHub 博客文章变成思维导图：
-
-```
-/mindmap https://github.blog/ai-and-ml/how-we-made-github-copilot-cli-more-selective-about-delegation/ --render
-```
-
-→ [`examples/copilot-cli-selective-delegation.mindmap.md`](examples/copilot-cli-selective-delegation.mindmap.md)（源文件）与 [`.mindmap.html`](examples/copilot-cli-selective-delegation.mindmap.html)（已渲染，可在浏览器打开）。
 
 ---
 
