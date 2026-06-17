@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>Markmap</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+.markmap-dark {
+  background: #27272a;
+  color: white;
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/style.css">
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.12/dist/browser/index.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/index.js"></script><script>((r) => {
+          setTimeout(r);
+        })(() => {
+  const { markmap, mm } = window;
+  const toolbar = new markmap.Toolbar();
+  toolbar.attach(mm);
+  const el = toolbar.render();
+  el.setAttribute("style", "position:absolute;bottom:20px;right:20px");
+  document.body.append(el);
+})</script><script>((getMarkmap, getOptions, root2, jsonOptions) => {
+              const markmap = getMarkmap();
+              window.mm = markmap.Markmap.create(
+                "svg#mindmap",
+                (getOptions || markmap.deriveOptions)(jsonOptions),
+                root2
+              );
+              if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                document.documentElement.classList.add("markmap-dark");
+              }
+            })(() => window.markmap,null,{"content":"FastContext","children":[{"content":"Problem &amp; Motivation","children":[{"content":"Repo exploration is the bottleneck","children":[{"content":"Locating code burns token budget","children":[],"payload":{"tag":"li","lines":"11,12"}},{"content":"Pollutes context with noise","children":[],"payload":{"tag":"li","lines":"12,13"}}],"payload":{"tag":"li","lines":"10,13"}},{"content":"Main agent (solver) vs subagent (explorer)","children":[],"payload":{"tag":"li","lines":"13,14"}},{"content":"Proprietary mechanisms, no open recipes","children":[],"payload":{"tag":"li","lines":"14,16"}}],"payload":{"tag":"h2","lines":"9,10"}},{"content":"Preliminary Analysis","children":[{"content":"300 GPT-5.4 Mini-SWE-Agent traces","children":[],"payload":{"tag":"li","lines":"17,18"}},{"content":"Read+search = <strong>56.2%</strong> of turns","children":[{"content":"46.5% of main-agent tokens","children":[],"payload":{"tag":"li","lines":"19,20"}}],"payload":{"tag":"li","lines":"18,20"}},{"content":"First edit at turn <strong>8.47</strong> avg","children":[{"content":"Median 6 exploration turns before edit","children":[],"payload":{"tag":"li","lines":"21,22"}}],"payload":{"tag":"li","lines":"20,22"}},{"content":"Unresolved explore more (8.34 vs 6.67)","children":[],"payload":{"tag":"li","lines":"22,24"}}],"payload":{"tag":"h2","lines":"16,17"}},{"content":"System Architecture","children":[{"content":"Read-only exploration subagent","children":[],"payload":{"tag":"li","lines":"25,26"}},{"content":"Three language-agnostic tools","children":[{"content":"<strong>Read</strong> &#x2014; line-numbered contents","children":[],"payload":{"tag":"li","lines":"27,28"}},{"content":"<strong>Glob</strong> &#x2014; path discovery","children":[],"payload":{"tag":"li","lines":"28,29"}},{"content":"<strong>Grep</strong> &#x2014; ripgrep regex search","children":[],"payload":{"tag":"li","lines":"29,30"}}],"payload":{"tag":"li","lines":"26,30"}},{"content":"Parallel tool calls per turn","children":[],"payload":{"tag":"li","lines":"30,31"}},{"content":"Returns <code>&lt;final_answer&gt;</code>","children":[{"content":"File paths + line ranges","children":[],"payload":{"tag":"li","lines":"32,33"}},{"content":"Optional relevance notes","children":[],"payload":{"tag":"li","lines":"33,35"}}],"payload":{"tag":"li","lines":"31,35"}}],"payload":{"tag":"h2","lines":"24,25"}},{"content":"Training","children":[{"content":"Stage 1 &#x2014; <strong>SFT</strong> initialization","children":[{"content":"2,954 examples from Sonnet 4.6","children":[],"payload":{"tag":"li","lines":"37,38"}},{"content":"parallel_toolcalls (first-turn search)","children":[],"payload":{"tag":"li","lines":"38,39"}},{"content":"multiturn_traj (evidence gathering)","children":[],"payload":{"tag":"li","lines":"39,40"}},{"content":"linerange (precise citations)","children":[],"payload":{"tag":"li","lines":"40,41"}},{"content":"Assistant-token-only loss","children":[],"payload":{"tag":"li","lines":"41,42"}}],"payload":{"tag":"li","lines":"36,42"}},{"content":"Stage 2 &#x2014; <strong>RL</strong> refinement","children":[{"content":"400 prompts, reference patches","children":[],"payload":{"tag":"li","lines":"43,44"}},{"content":"Reward: F1(file)+F1(line)+parallel&#x2212;format","children":[],"payload":{"tag":"li","lines":"44,45"}},{"content":"GRPO from SFT checkpoint","children":[],"payload":{"tag":"li","lines":"45,46"}}],"payload":{"tag":"li","lines":"42,46"}},{"content":"Backbones","children":[{"content":"Qwen3-4B-Instruct","children":[],"payload":{"tag":"li","lines":"47,48"}},{"content":"Qwen3-Coder-30BA3B","children":[],"payload":{"tag":"li","lines":"48,50"}}],"payload":{"tag":"li","lines":"46,50"}}],"payload":{"tag":"h2","lines":"35,36"}},{"content":"Experiments","children":[{"content":"Benchmarks","children":[{"content":"SWE-bench Multilingual (300)","children":[],"payload":{"tag":"li","lines":"52,53"}},{"content":"SWE-bench Pro (200 subset)","children":[],"payload":{"tag":"li","lines":"53,54"}},{"content":"SWE-QA (repo QA, LLM-judge)","children":[],"payload":{"tag":"li","lines":"54,55"}}],"payload":{"tag":"li","lines":"51,55"}},{"content":"Main agents","children":[{"content":"GPT-5.4, GLM-5.1, Kimi-K2.6","children":[],"payload":{"tag":"li","lines":"56,57"}}],"payload":{"tag":"li","lines":"55,57"}},{"content":"Scaffold: Mini-SWE-Agent","children":[],"payload":{"tag":"li","lines":"57,58"}},{"content":"Variants: 30B-SFT, 4B-SFT, 4B-RL","children":[],"payload":{"tag":"li","lines":"58,60"}}],"payload":{"tag":"h2","lines":"50,51"}},{"content":"Results","children":[{"content":"Beats direct solving everywhere","children":[],"payload":{"tag":"li","lines":"61,62"}},{"content":"Resolution <strong>up to +5.5%</strong>","children":[{"content":"SWE-bench Pro GPT-5.4 46.0&#x2192;51.5","children":[],"payload":{"tag":"li","lines":"63,64"}}],"payload":{"tag":"li","lines":"62,64"}},{"content":"Tokens <strong>up to &#x2212;60%</strong>","children":[{"content":"SWE-QA GPT-5.4 &#x2212;60.3%","children":[],"payload":{"tag":"li","lines":"65,66"}}],"payload":{"tag":"li","lines":"64,66"}},{"content":"<strong>4B-RL can beat 30B-SFT</strong>","children":[{"content":"GLM-5.1 Pro 22.5 vs 20.0","children":[],"payload":{"tag":"li","lines":"67,68"}}],"payload":{"tag":"li","lines":"66,68"}},{"content":"RL improves compact explorer (all 9)","children":[],"payload":{"tag":"li","lines":"68,69"}},{"content":"Standalone F1: 73.71 file / 60.35 module","children":[],"payload":{"tag":"li","lines":"69,71"}}],"payload":{"tag":"h2","lines":"60,61"}},{"content":"Cost &amp; Findings","children":[{"content":"4B-RL: 162 calls / 300 tasks","children":[],"payload":{"tag":"li","lines":"72,73"}},{"content":"~&#x24;4.52 explorer vs ~&#x24;69 net saving","children":[],"payload":{"tag":"li","lines":"73,74"}},{"content":"Explorer &#x2248;2.1% of total cost","children":[],"payload":{"tag":"li","lines":"74,75"}},{"content":"Exploration = first-class trainable component","children":[],"payload":{"tag":"li","lines":"75,77"}}],"payload":{"tag":"h2","lines":"71,72"}},{"content":"Limitations","children":[{"content":"Only Mini-SWE-Agent integration","children":[],"payload":{"tag":"li","lines":"78,79"}},{"content":"Strong main models only","children":[],"payload":{"tag":"li","lines":"79,80"}},{"content":"Possible benchmark overlap","children":[],"payload":{"tag":"li","lines":"80,81"}},{"content":"Smallest explorer 4B (1.7B/0.6B planned)","children":[],"payload":{"tag":"li","lines":"81,83"}}],"payload":{"tag":"h2","lines":"77,78"}},{"content":"Meta","children":[{"content":"<code>cs.SE</code> &#xb7; arXiv:2606.14066v1","children":[],"payload":{"tag":"li","lines":"84,85"}},{"content":"Microsoft + SJTU &#xb7; 12 Jun 2026","children":[],"payload":{"tag":"li","lines":"85,86"}},{"content":"Code: github.com/microsoft/fastcontext","children":[],"payload":{"tag":"li","lines":"86,87"}}],"payload":{"tag":"h2","lines":"83,84"}}],"payload":{"tag":"h1","lines":"7,8"}},{"colorFreezeLevel":2,"maxWidth":300})</script>
+</body>
+</html>
