@@ -8,13 +8,13 @@ Real output from the `mindmap` skill — see what it produces before you install
 
 Source: [How we made GitHub Copilot CLI more selective about delegation](https://github.blog/ai-and-ml/how-we-made-github-copilot-cli-more-selective-about-delegation/)
 
-Generated with a single command (URL input):
+Generated with a single command (URL input), using the multi-agent judge panel:
 
 ```
-/mindmap https://github.blog/ai-and-ml/how-we-made-github-copilot-cli-more-selective-about-delegation/ --render
+/mindmap https://github.blog/ai-and-ml/how-we-made-github-copilot-cli-more-selective-about-delegation/ --panel --render
 ```
 
-The skill fetched the page, mirrored its structure into a condensed hierarchy, wrote the Markmap `.md`, then rendered a standalone interactive `.html`.
+The `--panel` flag runs a 3-proposer / 3-judge / 1-synthesizer panel that designs the structure and picks the best format per node — note the **bolded headline metrics**, the reliability/responsiveness **tables**, the handoff **checklist**, and the `find → read → edit → verify` **code** node. The skill then rendered a standalone interactive `.html`.
 
 | File | What it is |
 |---|---|
@@ -27,13 +27,13 @@ The skill fetched the page, mirrored its structure into a condensed hierarchy, w
 
 Source: [FastContext: Training Efficient Repository Explorer for Coding Agents](https://arxiv.org/abs/2606.14066) (arXiv:2606.14066)
 
-Generated with a single command (URL input):
+Generated with a single command (URL input), using the multi-agent judge panel:
 
 ```
-/mindmap https://arxiv.org/html/2606.14066v1 --render
+/mindmap https://arxiv.org/html/2606.14066v1 --panel --render
 ```
 
-The skill fetched the full HTML paper, mirrored its section outline into a condensed hierarchy, wrote the Markmap `.md`, then rendered a standalone interactive `.html`.
+The `--panel` flag runs a 3-proposer / 3-judge / 1-synthesizer panel. For this paper it surfaced the payoff first (**+5.5% resolution, −60% tokens**), rendered the benchmark and F1 results as **tables**, the reward function as a **code** node, and the limitations as a **checklist** — then rendered a standalone interactive `.html`.
 
 | File | What it is |
 |---|---|

@@ -8,7 +8,7 @@ allowed-tools: Bash, Read, Write, Glob, WebFetch
 # Mindmap Skill — Generate an Interactive Markmap
 
 ## Trigger
-`/mindmap <input> [--render] [--output <path>]`
+`/mindmap <input> [--panel] [--render] [--output <path>]`
 
 `<input>` is one of:
 - a **file path** — read the file and map it
@@ -17,6 +17,7 @@ allowed-tools: Bash, Read, Write, Glob, WebFetch
 - a short **topic** — generate a map from your own knowledge
 
 Flags:
+- `--panel` — design the structure with a multi-agent judge panel (token-intensive; best for complex/important sources like papers). See **Step 2 → Judge Panel**.
 - `--render` — after writing the `.md`, also produce a standalone interactive `.html`
 - `--output <path>` — write the `.md` to this path instead of the default
 
@@ -48,6 +49,34 @@ Rules:
 - **Depth:** aim for 3–4 levels.
 - **Phrases, not sentences:** every node is a short label.
 - **Legibility over completeness:** for a very large source, map its structure and key points — not every line. Target **4–7 main branches** for unstructured/topic/large sources; when the source is already structured, mirror its own outline instead. Condense aggressively.
+
+#### Judge Panel (only with `--panel`)
+When `--panel` is passed, do not build the structure single-handed. Instead run a
+multi-agent panel via the **Workflow** tool, using the prompts in
+[`references/judge-panel.md`](references/judge-panel.md):
+
+1. **Propose** — 3 proposer agents each design a full structure through a
+   different lens (narrative-first, data-first, audience-first), assigning every
+   node a **format** (list/table/code/checkbox/link/bold) and a **tier**
+   (`core` renders everywhere; `rich` = table/code/checkbox, standard-markmap only).
+2. **Judge** — 3 judge agents independently score all proposals on the rubric
+   (skill rules + presentation: punchline-first, headline numbers, leaf
+   legibility, visual balance, format fit) and name each proposal's best idea.
+3. **Synthesize** — 1 synthesizer agent takes the top-scored proposal as the
+   spine, grafts the judges' flagged ideas, and emits the final Markmap `.md`.
+
+Use the Workflow skeleton and the exact prompts/schemas in the reference file.
+Cost note: this spawns ~7 agents and is token-intensive — reserve it for complex
+or high-stakes sources. If all proposers fail, fall back to the normal Step 2
+single-pass build and tell the user.
+
+**Render-tier safety:** the synthesizer keeps `rich` formats — they render on the
+default `.md` path (markmap.js.org / VS Code ext / `--render`). The vertical
+**poster** path (`scripts/parse-md.mjs`) reads only `##` headings and `-`
+bullets, so before sending a panel `.md` down the poster path, pass it through
+`scripts/degrade-rich.mjs` (`node scripts/degrade-rich.mjs <in.md> <out.md>`),
+which rewrites tables/code/checkboxes as bullets. Content is reshaped, **never
+silently dropped**.
 
 ### Step 3: Write the Markmap `.md`
 Write a file in the exact shape shown under **Markmap Format** below.
