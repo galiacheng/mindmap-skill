@@ -1,16 +1,44 @@
-# mindmap
+<div align="center">
 
-[English](README.md) | [中文](README.zh.md)
+# 🧠 mindmap
 
-**Understand anything at a glance — turn a file, a URL, or a topic into a mindmap without leaving your AI coding agent.**
+**Understand anything at a glance — turn a file, a URL, or a topic into a zoomable mindmap without leaving your AI coding agent.**
+
+[English](README.md) · [中文](README.zh.md)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e.svg)](LICENSE)
+[![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20Copilot%20CLI-2563eb)](#-install)
+[![Output](https://img.shields.io/badge/output-Markmap%20.md%20%2B%20.html-f97316)](https://markmap.js.org)
+[![Skills](https://img.shields.io/badge/skills-%2Fmindmap%20%7C%20%2Fmindmap--zh-8b5cf6)](#-install)
+
+</div>
 
 `mindmap` is a plugin for [Claude Code](https://docs.claude.com/en/docs/claude-code) and [GitHub Copilot CLI](https://docs.github.com/copilot/concepts/agents/copilot-cli). Point it at a dense report, a long article, or just a topic, and it distills the key ideas into a clean, zoomable [Markmap](https://markmap.js.org) mindmap — right from your terminal.
 
 > Two languages in one plugin: `/mindmap` (English) and `/mindmap-zh` (中文).
 
+### From any source to a map — in one command
+
+```mermaid
+flowchart LR
+    IN["Input<br/>file / URL / text / topic"] --> CL{Classify}
+    CL -->|URL| FE[Fetch page]
+    CL -->|file| RD[Read file]
+    CL -->|prose| TX[Use as text]
+    CL -->|topic| KN[Model knowledge]
+    FE --> ST["Build hierarchy<br/>4-7 branches, depth 3-4"]
+    RD --> ST
+    TX --> ST
+    KN --> ST
+    ST --> WR["Write Markmap .md"]
+    WR --> RN{--render?}
+    RN -->|yes| HT["Standalone .html"]
+    RN -->|no| MD[".md deliverable"]
+```
+
 ---
 
-## See it
+## 👀 See it
 
 One command turns a long GitHub blog post into a mindmap:
 
@@ -41,7 +69,7 @@ That's real output — see [`examples/`](examples/) for the full Markmap `.md` p
 
 ---
 
-## Why use it
+## ✨ Why use it
 
 - **Grasp dense material fast** — collapse a 3,000-word report into 5–7 branches you can scan at a glance, instead of reading top to bottom.
 - **One command, any source** — a file, a URL, pasted notes, or just a topic. No copy-pasting into a separate web tool.
@@ -53,7 +81,7 @@ That's real output — see [`examples/`](examples/) for the full Markmap `.md` p
 
 ---
 
-## Install
+## 📦 Install
 
 The same repo is a valid plugin for **both** Claude Code and GitHub Copilot CLI — they share the plugin/marketplace format.
 
@@ -96,10 +124,10 @@ Then run `/reload-skills` (or restart Claude Code). Confirm with `/help` that `/
 
 ---
 
-## Usage
+## ⚡ Usage
 
 ```
-/mindmap <input> [--render] [--output <path>]
+/mindmap <input> [--panel] [--render] [--output <path>]
 ```
 
 | Input | Example | Behavior |
@@ -111,12 +139,68 @@ Then run `/reload-skills` (or restart Claude Code). Confirm with `/help` that `/
 
 **Flags**
 
+- `--panel` — design the structure with a multi-agent judge panel; best for complex or important sources (see **The judge panel** below).
 - `--render` — after writing the `.md`, also produce a standalone interactive `.html` (needs Node.js / `npx`).
 - `--output <path>` — write the `.md` to a specific path instead of the default.
 
 ---
 
-## Output format
+## 🧑‍⚖️ The judge panel (`--panel`)
+
+For complex or high-stakes sources — papers, long reports — add `--panel`. Instead of designing the structure in a single pass, the skill runs a **multi-agent panel**: **3 proposers → 3 judges → 1 synthesizer**. They compete on structure and pick the best format for every node.
+
+```mermaid
+flowchart TB
+    SRC["Source content + skill rules"]
+    subgraph PROPOSE["1 - Propose (3 lenses)"]
+        P1["Proposer A<br/>narrative-first"]
+        P2["Proposer B<br/>data-first"]
+        P3["Proposer C<br/>audience-first"]
+    end
+    subgraph JUDGE["2 - Judge (score 10 dimensions)"]
+        J1["Judge 1"]
+        J2["Judge 2"]
+        J3["Judge 3"]
+    end
+    subgraph SYNTH["3 - Synthesize"]
+        SY["Top proposal = spine<br/>+ graft judges' best ideas"]
+    end
+    SRC --> P1 & P2 & P3
+    P1 & P2 & P3 --> J1 & J2 & J3
+    J1 & J2 & J3 --> SY
+    SY --> OUT["Final Markmap .md"]
+```
+
+**1 · Propose** — three agents each design a full structure through a different lens:
+
+| Lens | Designs the map around... |
+|---|---|
+| **Narrative-first** | the source's own arc and section order |
+| **Data-first** | the headline numbers and evidence, every metric **bolded** |
+| **Audience-first** | the punchline first, every leaf legible on a slide |
+
+Each proposer also tags every node with a **format** and a **render tier**:
+
+| Format | Tier | Best for |
+|---|---|---|
+| bullet list | `core` | parallel facts |
+| bold inline | `core` | headline metric, emphasis |
+| link | `core` | references, repo, arXiv |
+| table | `rich` | comparisons, benchmark numbers |
+| code block | `rich` | formulas, reward functions, code |
+| checkbox | `rich` | tasks, limitations, checklists |
+
+**2 · Judge** — three judges independently score every proposal 1–5 on **ten dimensions** (branch count, depth, phrasing, legibility, source fidelity, punchline-first, headline numbers, leaf legibility, visual balance, format fit) and name each proposal's single best idea.
+
+**3 · Synthesize** — one agent takes the top-scored proposal as the **spine**, grafts in the best ideas the judges flagged from the other two, and emits the final Markmap `.md`.
+
+> **Cost:** the panel spawns ~7 agents and is token-intensive — reserve it for sources worth the spend. Without `--panel`, the skill does a fast single-pass build. The exact prompts and schemas live in [`skills/mindmap/references/judge-panel.md`](skills/mindmap/references/judge-panel.md).
+
+Both real examples in [`examples/`](examples/) were generated with `--panel`.
+
+---
+
+## 🗂️ Output format
 
 The skill writes [Markmap](https://markmap.js.org)-flavored markdown — a single `#` root, `##` branches, and nested bullets:
 
@@ -150,7 +234,7 @@ markmap:
 
 ---
 
-## Rendering to HTML
+## 🌐 Rendering to HTML
 
 ```
 /mindmap "transformer attention" --render
@@ -165,7 +249,7 @@ This runs `npx markmap-cli <file>.md -o <file>.html --no-open` under the hood (v
 
 ---
 
-## Generate mindmaps in CI (GitHub Action)
+## 🤖 Generate mindmaps in CI (GitHub Action)
 
 The repo ships a workflow — [`.github/workflows/generate-mindmap.yml`](.github/workflows/generate-mindmap.yml) — that runs this plugin in GitHub Actions: give it a URL, some text, or a topic, and it generates the mindmap and opens a pull request adding it to [`examples/`](examples/).
 
@@ -182,19 +266,29 @@ The repo ships a workflow — [`.github/workflows/generate-mindmap.yml`](.github
 
 **What it does:** installs [Copilot CLI](https://www.npmjs.com/package/@github/copilot), loads this repo as a plugin (`--plugin-dir`), runs the `/mindmap` skill non-interactively (`copilot -p … --model claude-opus-4.8`) to write the `.md` (and `.html`) into `examples/` and add an entry to [`examples/README.md`](examples/README.md), then commits the new files to a `mindmap/run-<id>` branch and opens a PR.
 
+```mermaid
+flowchart LR
+    U["Actions tab<br/>Run workflow"] --> S["Install Node 22<br/>+ Copilot CLI"]
+    S --> C["copilot -p ...<br/>--plugin-dir .<br/>--model claude-opus-4.8"]
+    C --> W["Write .md / .html<br/>into examples/"]
+    W --> P["Commit to branch<br/>+ open Pull Request"]
+```
+
 ---
 
-## How it works
+## 🛠️ How it works
 
 This is a **prompt-driven** skill: the intelligence lives in instructions, not code.
 
 ```
 skills/mindmap/
-├── SKILL.md            # the workflow Claude follows: resolve input → build hierarchy → write .md → (optional) render
+├── SKILL.md              # the workflow: resolve input → build hierarchy → write .md → (optional) render
 ├── scripts/
-│   └── render.sh       # the only code — a thin wrapper around `npx markmap-cli`
+│   ├── render.sh         # thin wrapper around `npx markmap-cli` (the .md → .html step)
+│   └── degrade-rich.mjs  # rewrites rich nodes (tables/code/checkboxes) to bullets for the poster path
 └── references/
-    └── copilot-tools.md  # Claude Code → Copilot CLI tool-name mapping
+    ├── copilot-tools.md  # Claude Code → Copilot CLI tool-name mapping
+    └── judge-panel.md    # the --panel multi-agent prompts, schemas, and workflow
 ```
 
 - [`SKILL.md`](skills/mindmap/SKILL.md) tells Claude how to classify the input, apply the hybrid structuring rules, write a well-formed Markmap file, and handle edge cases (missing files, empty input, name collisions, render fallback).
@@ -204,7 +298,7 @@ See [`docs/design-spec.md`](docs/design-spec.md) for the full design.
 
 ---
 
-## Development
+## 🧪 Development
 
 The render helper has a bash test suite (no network — it uses a fake `npx`):
 
@@ -231,6 +325,6 @@ mindmap/
 
 ---
 
-## License
+## 📄 License
 
 [MIT](LICENSE) © 2026 Haixia Cheng
