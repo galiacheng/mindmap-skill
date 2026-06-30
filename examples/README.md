@@ -40,3 +40,22 @@ The `--panel` flag runs a 3-proposer / 3-judge / 1-synthesizer panel. For this p
 | [`fastcontext-repository-explorer.mindmap.md`](fastcontext-repository-explorer.mindmap.md) | The Markmap source — paste at [markmap.js.org](https://markmap.js.org) or open in the VS Code Markmap extension |
 | [`fastcontext-repository-explorer.mindmap.html`](fastcontext-repository-explorer.mindmap.html) | The rendered interactive mindmap — open it [live on GitHub Pages](https://galiacheng.github.io/mindmap-skills/examples/fastcontext-repository-explorer.mindmap.html), or download and open in any browser |
 
+## LinkedIn article → mindmap
+
+**▶ [Open the live interactive mindmap](https://galiacheng.github.io/mindmap-skills/examples/why-systems-thinkers-define-ai-era.mindmap.html)** (hosted on GitHub Pages — click, zoom, collapse branches).
+
+Source: [Why Systems Thinkers Will Define the AI Era](https://www.linkedin.com/pulse/why-systems-thinkers-define-ai-era-catherine-bye-5ralc/) by Catherine Bye
+
+Generated with a single command (URL input), using the multi-agent judge panel:
+
+```
+/mindmap https://www.linkedin.com/pulse/why-systems-thinkers-define-ai-era-catherine-bye-5ralc/ --panel --render
+```
+
+The `--panel` flag runs a 3-proposer / 3-judge / 1-synthesizer panel that designs the structure and picks the best format per node — note the punchline-first thesis, the **bolded headline numbers** (`+30%` productivity, `92%` vs `1%` AI-maturity, `1 in 5` neurodivergent), the archetype and research **tables**, and the "who to look for" **checklist**. The skill then rendered a standalone interactive `.html`.
+
+| File | What it is |
+|---|---|
+| [`why-systems-thinkers-define-ai-era.mindmap.md`](why-systems-thinkers-define-ai-era.mindmap.md) | The Markmap source — paste at [markmap.js.org](https://markmap.js.org) or open in the VS Code Markmap extension |
+| [`why-systems-thinkers-define-ai-era.mindmap.html`](why-systems-thinkers-define-ai-era.mindmap.html) | The rendered interactive mindmap — open it [live on GitHub Pages](https://galiacheng.github.io/mindmap-skills/examples/why-systems-thinkers-define-ai-era.mindmap.html), or download and open in any browser |
+

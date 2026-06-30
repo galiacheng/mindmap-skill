@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>Markmap</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+.markmap-dark {
+  background: #27272a;
+  color: white;
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/style.css">
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.12/dist/browser/index.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/index.js"></script><script>((r) => {
+          setTimeout(r);
+        })(() => {
+  const { markmap, mm } = window;
+  const toolbar = new markmap.Toolbar();
+  toolbar.attach(mm);
+  const el = toolbar.render();
+  el.setAttribute("style", "position:absolute;bottom:20px;right:20px");
+  document.body.append(el);
+})</script><script>((getMarkmap, getOptions, root2, jsonOptions) => {
+              const markmap = getMarkmap();
+              window.mm = markmap.Markmap.create(
+                "svg#mindmap",
+                (getOptions || markmap.deriveOptions)(jsonOptions),
+                root2
+              );
+              if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                document.documentElement.classList.add("markmap-dark");
+              }
+            })(() => window.markmap,null,{"content":"Why Systems Thinkers Will Define the AI Era","children":[{"content":"The Punchline","children":[{"content":"<strong>See systems &gt; work the room</strong>","children":[],"payload":{"tag":"li","lines":"10,11"}},{"content":"AI rewards systems thinking over social maneuvering","children":[],"payload":{"tag":"li","lines":"11,12"}},{"content":"Neurodivergent leaders are uniquely prepared","children":[],"payload":{"tag":"li","lines":"12,13"}},{"content":"\n<blockquote data-lines=\"13,14\">\n<p data-lines=\"13,14\">&quot;What if the traits you&apos;ve been told to &apos;fix&apos; are exactly what your organization needs most?&quot;</p>\n</blockquote>","children":[],"payload":{"tag":"li","lines":"13,15"}}],"payload":{"tag":"h2","lines":"9,10"}},{"content":"The Old Playbook Falls Short","children":[{"content":"Two archetypes ruled tech for 30 years","children":[],"payload":{"tag":"li","lines":"16,17"}},{"content":"\n<table data-lines=\"17,21\">\n<thead data-lines=\"17,18\">\n<tr data-lines=\"17,18\">\n<th>Archetype</th>\n<th>Strength</th>\n<th>Limit</th>\n</tr>\n</thead>\n<tbody data-lines=\"19,21\">\n<tr data-lines=\"19,20\">\n<td><strong>Dragon Slayers</strong></td>\n<td>Bold, high-profile wins</td>\n<td>Heroic individual focus</td>\n</tr>\n<tr data-lines=\"20,21\">\n<td><strong>Consensus Builders</strong></td>\n<td>Align stakeholders</td>\n<td>Politics over redesign</td>\n</tr>\n</tbody>\n</table>","children":[],"payload":{"tag":"li","lines":"17,21"}},{"content":"Thrived when tech evolved incrementally","children":[],"payload":{"tag":"li","lines":"21,22"}},{"content":"AI era now demands <strong>more</strong>","children":[],"payload":{"tag":"li","lines":"22,24"}}],"payload":{"tag":"h2","lines":"15,16"}},{"content":"What Systems Thinking Looks Like","children":[{"content":"Donella Meadows: see patterns, not events","children":[],"payload":{"tag":"li","lines":"25,26"}},{"content":"Systems thinkers:","children":[{"content":"Diagnose root causes, not symptoms","children":[],"payload":{"tag":"li","lines":"27,28"}},{"content":"Connect dots across silos","children":[],"payload":{"tag":"li","lines":"28,29"}},{"content":"Spot <strong>leverage points</strong> for outsized impact","children":[],"payload":{"tag":"li","lines":"29,30"}},{"content":"Carry others into new ways of working","children":[],"payload":{"tag":"li","lines":"30,31"}}],"payload":{"tag":"li","lines":"26,31"}},{"content":"In the AI era: <strong>decisive</strong>, not nice-to-have","children":[],"payload":{"tag":"li","lines":"31,33"}}],"payload":{"tag":"h2","lines":"24,25"}},{"content":"The Neurodivergent Advantage","children":[{"content":"Brains wired differently, not broken","children":[],"payload":{"tag":"li","lines":"34,35"}},{"content":"Core strengths:","children":[{"content":"<strong>Pattern recognition</strong> &#x2014; associative, non-obvious links","children":[],"payload":{"tag":"li","lines":"36,37"}},{"content":"<strong>Nonlinear processing</strong> &#x2014; multiple solution pathways","children":[],"payload":{"tag":"li","lines":"37,38"}},{"content":"<strong>Hyperfocus</strong> &#x2014; map end-to-end systems","children":[],"payload":{"tag":"li","lines":"38,39"}},{"content":"<strong>System challenging</strong> &#x2014; question assumptions","children":[],"payload":{"tag":"li","lines":"39,40"}}],"payload":{"tag":"li","lines":"35,40"}},{"content":"Where others see chaos, they see structure","children":[],"payload":{"tag":"li","lines":"40,42"}}],"payload":{"tag":"h2","lines":"33,34"}},{"content":"The Research Backing It","children":[{"content":"\n<table data-lines=\"43,49\">\n<thead data-lines=\"43,44\">\n<tr data-lines=\"43,44\">\n<th>Source</th>\n<th>Finding</th>\n</tr>\n</thead>\n<tbody data-lines=\"45,49\">\n<tr data-lines=\"45,46\">\n<td>Stanford Neurodiversity 2024</td>\n<td>Excel at pattern recognition, hyperfocus</td>\n</tr>\n<tr data-lines=\"46,47\">\n<td>WEF Oct 2024</td>\n<td>Neuro-inclusion delivers business returns</td>\n</tr>\n<tr data-lines=\"47,48\">\n<td>Catalyst 2025</td>\n<td>Neurodiverse teams up to <strong>+30% productive</strong></td>\n</tr>\n<tr data-lines=\"48,49\">\n<td>EY case</td>\n<td>One employee&apos;s algorithm saved <strong>millions</strong></td>\n</tr>\n</tbody>\n</table>","children":[],"payload":{"tag":"li","lines":"43,49"}},{"content":"<strong>1 in 5</strong> people are neurodivergent (~20%)","children":[],"payload":{"tag":"li","lines":"49,51"}}],"payload":{"tag":"h2","lines":"42,43"}},{"content":"Why the AI Era Demands It","children":[{"content":"McKinsey &quot;AI in the Workplace&quot; (Jan 2025)","children":[{"content":"<strong>92%</strong> plan to raise AI investment","children":[],"payload":{"tag":"li","lines":"53,54"}},{"content":"Only <strong>1%</strong> call themselves AI-mature","children":[],"payload":{"tag":"li","lines":"54,55"}}],"payload":{"tag":"li","lines":"52,55"}},{"content":"Winners <strong>re-architect systems</strong>, not plug in tools","children":[],"payload":{"tag":"li","lines":"55,56"}},{"content":"INCOSE: systems thinking = critical competency","children":[],"payload":{"tag":"li","lines":"56,57"}},{"content":"Leaders must:","children":[{"content":"See across silos, integrate tech + people + process","children":[],"payload":{"tag":"li","lines":"58,59"}},{"content":"Redesign workflows, not just optimize","children":[],"payload":{"tag":"li","lines":"59,60"}},{"content":"Help teams adapt to continuous change","children":[],"payload":{"tag":"li","lines":"60,62"}}],"payload":{"tag":"li","lines":"57,62"}}],"payload":{"tag":"h2","lines":"51,52"}},{"content":"From Liability to Asset","children":[{"content":"Author founded <strong>Knack Collective</strong>","children":[],"payload":{"tag":"li","lines":"63,64"}},{"content":"Redesign whole marketing operating systems","children":[],"payload":{"tag":"li","lines":"64,65"}},{"content":"Liability &#x2192; greatest asset: see, design, lead systems","children":[],"payload":{"tag":"li","lines":"65,67"}}],"payload":{"tag":"h2","lines":"62,63"}},{"content":"What To Do Now","children":[{"content":"Spot the systems thinkers already in your midst","children":[],"payload":{"tag":"li","lines":"68,69"}},{"content":"Look for who:","children":[{"content":"<svg width=\"16\" height=\"16\" viewBox=\"0 -3 24 24\"><path fill-rule=\"evenodd\" d=\"M6 5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zM3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-5z\" clip-rule=\"evenodd\"/></svg> Maps workflows nobody else will touch","children":[],"payload":{"tag":"li","lines":"70,71"}},{"content":"<svg width=\"16\" height=\"16\" viewBox=\"0 -3 24 24\"><path fill-rule=\"evenodd\" d=\"M6 5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zM3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-5z\" clip-rule=\"evenodd\"/></svg> Questions assumptions everyone accepts","children":[],"payload":{"tag":"li","lines":"71,72"}},{"content":"<svg width=\"16\" height=\"16\" viewBox=\"0 -3 24 24\"><path fill-rule=\"evenodd\" d=\"M6 5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zM3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-5z\" clip-rule=\"evenodd\"/></svg> Delivers results but lacks &quot;visibility&quot;","children":[],"payload":{"tag":"li","lines":"72,73"}}],"payload":{"tag":"li","lines":"69,73"}},{"content":"Recognize, empower, reward systems thinking","children":[],"payload":{"tag":"li","lines":"73,74"}},{"content":"Future belongs to those who <strong>design new ways of playing</strong>","children":[],"payload":{"tag":"li","lines":"74,75"}}],"payload":{"tag":"h2","lines":"67,68"}}],"payload":{"tag":"h1","lines":"7,8"}},{"colorFreezeLevel":2,"maxWidth":300})</script>
+</body>
+</html>
