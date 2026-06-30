@@ -4,9 +4,9 @@ name: Generate mindmap
 # `mindmap` Copilot CLI plugin, then open a pull request that adds it to examples/.
 #
 # Requires one repository secret:
-#   COPILOT_CLI_TOKEN - a fine-grained personal access token with the
-#                       "Copilot Requests" account permission (the built-in
-#                       GITHUB_TOKEN does not have Copilot access).
+#   GH_TOKEN - a fine-grained personal access token with the
+#              "Copilot Requests" account permission (the built-in
+#              GITHUB_TOKEN does not have Copilot access).
 
 on:
   workflow_dispatch:
@@ -53,7 +53,7 @@ jobs:
       - name: Generate mindmap with Copilot CLI
         env:
           # Order of precedence for Copilot auth: COPILOT_GITHUB_TOKEN > GH_TOKEN > GITHUB_TOKEN.
-          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_CLI_TOKEN }}
+          COPILOT_GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           # User-controlled input is passed via env (never interpolated into the
           # script body) to avoid shell command injection.
           MINDMAP_INPUT: ${{ inputs.input }}
@@ -67,9 +67,9 @@ jobs:
           # Without it, Copilot CLI aborts with a cryptic "No authentication
           # information found" error.
           if [ -z "${COPILOT_GITHUB_TOKEN:-}" ]; then
-            echo "::error::The COPILOT_CLI_TOKEN repository secret is not set (or is empty)." \
+            echo "::error::The GH_TOKEN repository secret is not set (or is empty)." \
               "Create a fine-grained PAT with the 'Copilot Requests' account permission" \
-              "and add it as the COPILOT_CLI_TOKEN secret. The built-in GITHUB_TOKEN cannot" \
+              "and add it as the GH_TOKEN secret. The built-in GITHUB_TOKEN cannot" \
               "be used because it has no Copilot access."
             exit 1
           fi
