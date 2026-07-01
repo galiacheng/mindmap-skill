@@ -7,7 +7,7 @@
 [English](README.md) · [中文](README.zh.md)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-22c55e.svg)](LICENSE)
-[![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20Copilot%20CLI-2563eb)](#-install)
+[![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20GitHub%20Copilot-2563eb)](#-install)
 [![Output](https://img.shields.io/badge/output-Markmap%20.md%20%2B%20.html-f97316)](https://markmap.js.org)
 [![Skills](https://img.shields.io/badge/skills-%2Fmindmap%20%7C%20%2Fmindmap--zh-8b5cf6)](#-install)
 
